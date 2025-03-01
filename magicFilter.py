@@ -32,11 +32,9 @@ async def photo_handler(message: Message):
 async def cmd_len(message: Message):
     await message.answer("Len")
 
-
 @dp.message(F.from_user.id == 6812498519)
 async def cmd_user(message: Message):
     await message.answer("Check user ID")
-
 
 @dp.message(F.text.startswith("Salom") & F.text.len() > 5)
 async def and_filter(message: Message):
@@ -50,9 +48,14 @@ async def cmd_or(message: Message):
 async def cmd_not(message: Message):
     await message.answer("not check")
 
-
 async def start():
     await dp.start_polling(bot,polling_timeout=1)
+
+
+
+
+
+
 
 
 run(start())

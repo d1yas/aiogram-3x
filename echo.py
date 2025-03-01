@@ -10,11 +10,9 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(TOKEN)
 dp = Dispatcher()
 
-
 @dp.message(CommandStart())
 async def start_command(message: types.Message):
     await message.answer("Hello World!")
-
 
 
 async def echo(message: types.Message):
