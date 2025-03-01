@@ -15,7 +15,7 @@ dp = Dispatcher()
 
 
 async def start():
-    dp,include(router())
+    dp.include_router(router)
     await dp.start_polling(bot,polling_timeout=1)
 
 
