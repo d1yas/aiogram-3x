@@ -38,3 +38,14 @@ async def inline_cars():
     for car in cars_2:
         keyboard_2.add(InlineKeyboardButton(text=car,url="t.me/djmbv"))
     return keyboard_2.adjust(2).as_markup()
+
+
+
+
+register_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Share contact", request_contact=True),
+        ]
+    ]
+)

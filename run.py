@@ -1,10 +1,8 @@
 import logging
-from xml.etree.ElementInclude import include
 
 from aiogram import Bot, Dispatcher
 from asyncio import run
 from config import TOKEN
-from app.handlers import router
 
 logging.basicConfig(level=logging.INFO)
 

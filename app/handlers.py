@@ -1,12 +1,14 @@
 from aiogram import types, F, Router
 from aiogram.filters import CommandStart,Command
-from aiogram.types import Message,  CallbackQuery
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 
 import app.keyboards as kb
+from app.middlewares import TestMiddleware
 
 router = Router()
+
+router.message.outer_middleware(TestMiddleware())
 
 class Register(StatesGroup):
     name = State()
