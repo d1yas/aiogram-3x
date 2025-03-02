@@ -2,16 +2,17 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardMarkup,InlineKeyboardButton)
 from aiogram.utils.keyboard import InlineKeyboardBuilder,ReplyKeyboardBuilder
 
-main = InlineKeyboardMarkup(
-    inline_keyboard=[
+main = ReplyKeyboardMarkup(
+    keyboard=[
         [
-            InlineKeyboardButton(text="Каталог", callback_data='catalog'),
+            KeyboardButton(text="Каталог"),
         ],
         [
-            InlineKeyboardButton(text="Корзина", callback_data='basket'),
+            KeyboardButton(text="Корзина"),
         ],
         [
-            InlineKeyboardButton(text="Контакты", callback_data='contacts'),
+            KeyboardButton(text="Контакты"),
+            KeyboardButton(text="О нас")
         ]
     ]
 )
