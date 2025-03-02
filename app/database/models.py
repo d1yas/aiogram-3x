@@ -10,19 +10,19 @@ class Base(AsyncAttrs, DeclarativeBase):
 
 class User(Base):
     __tablename__ = 'users'
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True,autoincrement=True)
     tg_id = mapped_column(BigInteger)
 
 
 class Category(Base):
     __tablename__ = 'categories'
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True,autoincrement=True)
     name: Mapped[str]= mapped_column(String(25))
 
 
 class Item(Base):
     __tablename__ = 'items'
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True,autoincrement=True)
     name: Mapped[str]= mapped_column(String(25))
     description: Mapped[str] = mapped_column(String(120))
     price: Mapped[int] = mapped_column()

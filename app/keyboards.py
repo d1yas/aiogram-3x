@@ -1,6 +1,9 @@
 from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardMarkup,InlineKeyboardButton)
 from aiogram.utils.keyboard import InlineKeyboardBuilder,ReplyKeyboardBuilder
+from sqlalchemy.util import bool_or_str
+
+from app.database.request import get_categories, get_category_item
 
 main = ReplyKeyboardMarkup(
     keyboard=[
@@ -14,39 +17,26 @@ main = ReplyKeyboardMarkup(
             KeyboardButton(text="Контакты"),
             KeyboardButton(text="О нас")
         ]
-    ]
+    ],
+    resize_keyboard=True,
+    input_field_placeholder="Выберите пункт меню..."
 )
 
-settings = InlineKeyboardMarkup(inline_keyboard=[
-    [
-        InlineKeyboardButton(text="Telegram", url="t.me/djmbv"),
-            ]
-])
+async def categories():
+    all_categories = await get_categories()
+    keyboard = InlineKeyboardBuilder()
 
-
-cars = ['Tesla ', 'Mercedes Benz', 'BMW',]
-
-async def reply_cars():
-    keyboard = ReplyKeyboardBuilder()
-    for car in cars:
-        keyboard.add(KeyboardButton(text=car))
+    for  category in all_categories:
+        keyboard.add(InlineKeyboardButton(text=category.name, callback_data=f'category_{category.id}'))
+    keyboard.add(InlineKeyboardButton(text='На главную', callback_data="to_main"))
     return keyboard.adjust(2).as_markup()
 
-cars_2 = ['Ferrari', 'RR', 'Bentli',]
+async def items(category_id):
+    all_items = await get_category_item(category_id)
+    board = InlineKeyboardBuilder()
 
-async def inline_cars():
-    keyboard_2 = InlineKeyboardBuilder()
-    for car in cars_2:
-        keyboard_2.add(InlineKeyboardButton(text=car,url="t.me/djmbv"))
-    return keyboard_2.adjust(2).as_markup()
+    for item in all_items:
+        board.add(InlineKeyboardButton(text=item.name, callback_data=f'item_{item.id}'))
 
-
-
-
-register_kb = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="Share contact", request_contact=True),
-        ]
-    ]
-)
+    board.add(InlineKeyboardButton(text='На главную', callback_data="to_main"))
+    return board.adjust(2).as_markup()
